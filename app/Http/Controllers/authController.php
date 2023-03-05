@@ -15,15 +15,25 @@ class authController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            if(Auth::user()->role_id == 1){
+                return redirect()->intended('/app');
+            }elseif(Auth::user() == 2){
+                return redirect()->intended('/dashboard/teacher');
+            }else{
+                return redirect()->intended('/dashboard');
+            }
         }
+
+        return back()->withErrors([
+            'username' => 'username tidak ditemukan'
+        ])->onlyInput('username');
     }
 
     public function username()

@@ -14,7 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () { return view('auth.login'); });
+Route::middleware(['auth'])->group(function(){
+    Route::get('/logout', [authController::class, 'logout']);
+    
+    Route::middleware(['admin'])->group(function () {
+        Route::view('/app', 'admin.index');
+    });
 
-Route::get('/auth', [authController::class, 'index']);
-Route::get('/login', [authController::class, 'login']);
+    Route::middleware(['teacher'])->group(function () {
+        
+    });
+
+    Route::middleware(['student'])->group(function () {
+        
+    });
+
+});
+
+
+Route::get('/auth', [authController::class, 'index'])->name('login');
+Route::get('/', function () { return view('auth.login'); });
+Route::post('/login', [authController::class, 'login']);
