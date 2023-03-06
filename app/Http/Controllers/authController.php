@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +31,8 @@ class authController extends Controller
                 return redirect()->intended('/dashboard');
             }
         }
+
+        Carbon::parse();
 
         return back()->withErrors([
             'username' => 'username tidak ditemukan'

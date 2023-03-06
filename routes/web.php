@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\accountController;
 use App\Http\Controllers\authController;
+use App\Http\Controllers\dashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/logout', [authController::class, 'logout']);
     
     Route::middleware(['admin'])->group(function () {
-        Route::view('/app', 'admin.index');
+        Route::get('/app', [dashboardController::class, 'index']);
+        Route::get('/account/profile', [accountController::class, 'profile']);
     });
 
     Route::middleware(['teacher'])->group(function () {
