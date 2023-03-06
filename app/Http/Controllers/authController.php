@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,12 @@ class authController extends Controller
 
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
+
+            $userFind = User::find(Auth::user()->id);
+            
+            $userFind->last_login = Carbon::now('Asia/Bangkok')->format('Y-m-d H:i:s');
+
+            $userFind->save();
 
             if(Auth::user()->role_id == 1){
                 return redirect()->intended('/app');
