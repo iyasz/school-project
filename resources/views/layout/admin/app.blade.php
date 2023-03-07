@@ -7,7 +7,7 @@
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <!-- CSS Libraries -->
 
@@ -219,7 +219,7 @@
             <img alt="image" src="@if(Auth::user()->profil_img == NULL) /admin/assets/img/avatar/avatar-1.png @else {{Auth::user()->profil_img}} @endif" class="rounded-circle mr-1">
             <div class="d-sm-none d-lg-inline-block">{{Auth::user()->name}}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-title">Logged in {{$lastLogin}} ago</div>
+              <div class="dropdown-title">Logged in {{ \Carbon\Carbon::now('Asia/Bangkok')->diffForHumans(Auth::user()->last_login)}} ago</div>
               <a href="/account/profile" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Profile
               </a>
@@ -256,10 +256,12 @@
                 </ul>
               </li> --}}
               <li class="menu-header">Users</li>
-              <li class="nav-item dropdown ">
+              <li class="nav-item dropdown @yield('adm-nav')">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Admin</span></a>
                 <ul class="dropdown-menu">
-                  <li class=""><a class="nav-link" href="layout-default.html">Admin List</a></li>
+                  <li class="@yield('adm-nav-index')"><a class="nav-link" href="/users/admin">Admin List</a></li>
+                  <li class=""><a class="nav-link" href="layout-default.html">Admin Create</a></li>
+                  <li class="@yield('adm-nav-deleted')"><a class="nav-link" href="/users/admin/view/deleted">Admin Deleted</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown ">
@@ -267,7 +269,7 @@
                 <ul class="dropdown-menu">
                   <li class=""><a class="nav-link" href="layout-default.html">Teachers List</a></li>
                   <li class=""><a class="nav-link" href="layout-default.html">Teachers Create</a></li>
-                  <li class=""><a class="nav-link" href="layout-default.html">Teachers Soft Deletes</a></li>
+                  <li class=""><a class="nav-link" href="layout-default.html">Teachers Deleted</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown ">
@@ -275,10 +277,19 @@
                 <ul class="dropdown-menu">
                   <li class=""><a class="nav-link" href="layout-default.html">Students List</a></li>
                   <li class=""><a class="nav-link" href="layout-default.html">Students Create</a></li>
-                  <li class=""><a class="nav-link" href="layout-default.html">Students Soft Deletes</a></li>
+                  <li class=""><a class="nav-link" href="layout-default.html">Students Deleted</a></li>
                 </ul>
               </li>
               <li class="menu-header">Classroom</li>
+
+              <li class="nav-item dropdown ">
+                <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Room</span></a>
+                <ul class="dropdown-menu">
+                  <li class=""><a class="nav-link" href="layout-default.html">Jurusan</a></li>
+                  <li class=""><a class="nav-link" href="layout-default.html">Mata Pelajaran</a></li>
+                  <li class=""><a class="nav-link" href="layout-default.html">Students Deleted</a></li>
+                </ul>
+              </li>
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Components</span></a>
                 <ul class="dropdown-menu">
@@ -403,6 +414,7 @@
   <!-- General JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

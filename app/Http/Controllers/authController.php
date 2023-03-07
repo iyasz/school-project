@@ -60,4 +60,5 @@ class authController extends Controller
 
         return redirect('/auth');
     }
+    
 }

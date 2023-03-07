@@ -38,6 +38,7 @@ $('[data-confirm]').each(function() {
         text: me.data('confirm-text-yes') || 'Yes',
         class: 'btn btn-danger btn-shadow',
         handler: function() {
+          $('#formSubmit').submit();
           eval(me.data('confirm-yes'));
         }
       },
@@ -52,6 +53,61 @@ $('[data-confirm]').each(function() {
     ]
   })
 });
+
+// bootstrap filter 
+$(document).ready(function(){
+  $("#inputAdmin").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tableAdmin tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+// axios delete admin
+
+// $(document).ready(function () {
+//   $(document).on("change", "#selectTelur", function () {
+//       var harga_id = $(this).val();
+
+//       // console.log(harga_id)
+
+//       $.ajax({
+//           type: "get",
+//           url: "/detail-transaksi/hargaPerTelur/" + harga_id,
+//           success: function (data) {
+//               $("#hargaPerTelur").val(data.harga);
+//           },
+//           error: function () {},
+//       });
+//   });
+// });
+
+// axios.delete('/users/admin/')
+//   .then(function (response) {
+//     // handle success
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     // handle error
+//     console.log(error);
+//   })
+//   .finally(function () {
+//     // always executed
+//   });
+
+//   axios.put(url[, data[, config]])
+// function submitForm(){
+//   $('#btnAdmDelete').on('click', function(){
+    
+//     $('button[data-confirm-yes]').on('click', function(e) {
+//       e.preventDefault();
+//       if (confirm($(this).data('confirm-yes'))) {
+//         $(this).closest('form').submit();
+//       }
+//     });
+//   });
+// }
 
 // Global
 $(function() {

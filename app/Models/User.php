@@ -15,6 +15,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes;
     public $timestamps = FALSE;
+    
+    protected $dates = ['deleted_at'];
 
     public function getIncrementing()
     {

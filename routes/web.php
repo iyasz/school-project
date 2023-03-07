@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\accountController;
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\dashboardController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,10 @@ Route::middleware(['auth'])->group(function(){
     Route::middleware(['admin'])->group(function () {
         Route::get('/app', [dashboardController::class, 'index']);
         Route::get('/account/profile', [accountController::class, 'profile']);
+
+        Route::resource('/users/admin', adminController::class);   
+        Route::get('/users/admin/view/deleted', [adminController::class, 'deleted']);
+        Route::post('/users/admin/view/{id}', [adminController::class, 'restore']);
     });
 
     Route::middleware(['teacher'])->group(function () {
