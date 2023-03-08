@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function(){
 
         Route::resource('/users/admin', adminController::class);   
         Route::get('/users/admin/view/deleted', [adminController::class, 'deleted']);
+        Route::get('/users/admin/paginate/{page}', [adminController::class, 'paginate']);
         Route::post('/users/admin/view/{id}', [adminController::class, 'restore']);
     });
 

@@ -64,7 +64,7 @@ $(document).ready(function(){
   });
 });
 
-// axios delete admin
+// func delete admin
 
 function deletedForm(id){
   // console.log($(this).attr("value"))
@@ -89,8 +89,60 @@ function deletedForm(id){
               console.log(e)
             },
       });
-
 }
+
+// paginate admin 
+  $('#paginateSelect').on('change', function(){
+    const pageVal = $(this).val()
+
+    $.ajax({
+    url: '/users/admin/paginate/' + pageVal,
+    type: 'GET',
+    success: function(e){
+      $('#adminPageForeach').html('');
+
+      $.each(e.data, function(index, value) {
+        // create a new row for each value
+        // console.log(value.id + ": " + value.name);
+
+        var row = $('<tr>');
+        // create a cell for each field in the value
+        var idCell = $('<td>').text(`Production Admin BM3`);
+        idCell.append(`<div class="table-links"> in <a href="#">Web Development</a>
+                 <div class="bullet"></div>
+                    <a href="#">View</a>
+                </div>`);
+
+        var nameCell = $('<td>').text('');
+        nameCell.append(`<a href="/users/admin/${value.id}" class="font-weight-600"><img src="` + (value.profil_img === null ? `/admin/assets/img/avatar/avatar-1.png` : value.profil_img) + `" alt="avatar" width="30" class="rounded-circle mr-1">${value.name}</a>`)
+
+        var emailCell = $('<td>').text('');
+        emailCell.append(`<button id="btnDeletedForm" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|Are you sure you want to remove `+value.name+`?. Do you want to continue?" data-confirm-yes="`+ deletedForm(value.id)+`"><i class="fas fa-trash"></i></button>`)
+
+        // append the cells to the row
+        row.append(idCell, nameCell, emailCell);
+        // append the row to the table
+        $('#adminPageForeach').append(row);
+        
+
+      })
+      // console.log(e)
+      if(e.data.length < pageVal){
+        $('#footerPage').html('');
+      }else{
+       
+      }
+
+      
+      // console.log(e.data)
+    },
+    error: function(error){
+      console.log(error)
+    }
+  })
+
+})
+
 
 // axios.delete('/users/admin/')
 //   .then(function (response) {
@@ -105,18 +157,6 @@ function deletedForm(id){
 //     // always executed
 //   });
 
-//   axios.put(url[, data[, config]])
-// function submitForm(){
-//   $('#btnAdmDelete').on('click', function(){
-    
-//     $('button[data-confirm-yes]').on('click', function(e) {
-//       e.preventDefault();
-//       if (confirm($(this).data('confirm-yes'))) {
-//         $(this).closest('form').submit();
-//       }
-//     });
-//   });
-// }
 
 // Global
 $(function() {

@@ -12,12 +12,21 @@ class adminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    public function paginate($page)
     {
-        // $admin = User::paginate(5)->where('role_id', 1);
+        $admin = DB::table('users')->where('role_id', 1)->paginate($page);
+
+        return $admin;
+    }
+
+    public function index(Request $request)
+    {
+
         $admin = DB::table('users')->where('role_id', 1)->paginate(5);
         return view('admin.admin.index', ['admin' => $admin]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -26,6 +35,7 @@ class adminController extends Controller
     {
         return view('admin.admin.create');
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -41,6 +51,7 @@ class adminController extends Controller
             'password' => 'required|confirmed',
         ];
 
+        //your message
         $message = [
             // 'name.required' => '',
             // 'email.required' => '',
@@ -60,7 +71,8 @@ class adminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $admin = User::findOrFail($id);
+        return view('admin.admin.detail', ['admin' => $admin]);
     }
 
     /**
