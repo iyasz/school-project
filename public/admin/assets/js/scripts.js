@@ -38,7 +38,7 @@ $('[data-confirm]').each(function() {
         text: me.data('confirm-text-yes') || 'Yes',
         class: 'btn btn-danger btn-shadow',
         handler: function() {
-          $('#formSubmit').submit();
+          
           eval(me.data('confirm-yes'));
         }
       },
@@ -66,22 +66,31 @@ $(document).ready(function(){
 
 // axios delete admin
 
-// $(document).ready(function () {
-//   $(document).on("change", "#selectTelur", function () {
-//       var harga_id = $(this).val();
+function deletedForm(id){
+  // console.log($(this).attr("value"))
+  // console.log(id)
+  // $.ajaxSetup({
+  //   headers: {
+  //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //   }
+  // });
 
-//       // console.log(harga_id)
+    $.ajax({
+          type: "DELETE",
+          data: {
+          _token: "{{ csrf_token() }}",
+          },
+           url: "/users/admin/" + id,
+           success: function (data) {
+             console.log(data);
+            location.replace("/users/admin")
+            },
+            error: function (e) {
+              console.log(e)
+            },
+      });
 
-//       $.ajax({
-//           type: "get",
-//           url: "/detail-transaksi/hargaPerTelur/" + harga_id,
-//           success: function (data) {
-//               $("#hargaPerTelur").val(data.harga);
-//           },
-//           error: function () {},
-//       });
-//   });
-// });
+}
 
 // axios.delete('/users/admin/')
 //   .then(function (response) {

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class adminController extends Controller
 {
@@ -12,7 +14,8 @@ class adminController extends Controller
      */
     public function index()
     {
-        $admin = User::all()->where('role_id', 1);
+        // $admin = User::paginate(5)->where('role_id', 1);
+        $admin = DB::table('users')->where('role_id', 1)->paginate(5);
         return view('admin.admin.index', ['admin' => $admin]);
     }
 
@@ -21,7 +24,7 @@ class adminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.admin.create');
     }
 
     /**
@@ -29,7 +32,27 @@ class adminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email',
+            'username' => 'required|max:150',
+            'no_telp' => 'required|numeric|digits_between:7,15',
+            'gender' => 'required',
+            'password' => 'required|confirmed',
+        ];
+
+        $message = [
+            // 'name.required' => '',
+            // 'email.required' => '',
+        ];
+        $validate =  $request->validate($rules, $message);
+        
+        $request['role_id'] = 1;
+        $request['password'] = password_hash($request->password, PASSWORD_DEFAULT, ['cost' => 10]);
+
+        User::create($request->except('_token', 'password_confirmation'));
+
+        return redirect('/users/admin/create');
     }
 
     /**
@@ -62,8 +85,8 @@ class adminController extends Controller
     public function destroy(string $id)
     {
         $admin = User::find($id);
-        $admin->delete();
-        return redirect('/users/admin');
+        return response()->$admin->delete();
+        // return redirect('/users/admin');
     }
     
     public function deleted()

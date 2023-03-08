@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon ;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -24,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
     {
         
         Carbon::now('Asia/Bangkok')->format('Y-m-d H:i:s');
+
+        Paginator::useBootstrapFive();
+        Paginator::useBootstrapFour();
 
     }
 }

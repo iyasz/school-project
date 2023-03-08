@@ -58,7 +58,7 @@
                           @foreach ($admin as $data)             
                           <tr>
                               <td>
-                                  Introduction Laravel 5
+                                  Production Admin BM3
                                   <div class="table-links   ">
                                       in <a href="#">Web Development</a>
                                       <div class="bullet"></div>
@@ -73,19 +73,29 @@
                                     <form id="formSubmit" class="d-inline" action="/users/admin/{{$data->id}}" method="POST">
                                         @method('delete')
                                         @csrf
-                                        <button id="btnAdmDelete" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|Are you sure you want to remove {{$data->name}}?. Do you want to continue?" type="submit" data-confirm-yes="form.submit()" data="anime" ><i class="fas fa-trash"></i></button>
+                                          <button id="btnDeletedForm" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|Are you sure you want to remove {{$data->name}}?. Do you want to continue?" data-confirm-yes="deletedForm(`{{$data->id}}`)" ><i class="fas fa-trash"></i></button>
+                                    
+                                        <button class="btn btn-danger">Delete</button>
                                     </form>
                                 </td>
                             </tr>
+                            
                             @endforeach
                     </tbody>
-                </table>
-            </div>
+                    
+                   </table>
+                
+                
+               </div>
+                  <div class="card-footer pb-1 text-center">
+                       <span>{{ $admin->links() }}</span>
+                    </div>
                 </div>
               </div>
             </div>
         </div>
     </div>
+    
     </section>
 </div>
 @endsection

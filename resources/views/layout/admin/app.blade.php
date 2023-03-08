@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>BM3 - School Project</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
+  
   <!-- CSS Libraries -->
-
+  
   <!-- Template CSS -->
+  <link rel="stylesheet" href="/admin/assets/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="/admin/assets/css/style.css">
   <link rel="stylesheet" href="/admin/assets/css/components.css">
 </head>
@@ -260,7 +262,7 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Admin</span></a>
                 <ul class="dropdown-menu">
                   <li class="@yield('adm-nav-index')"><a class="nav-link" href="/users/admin">Admin List</a></li>
-                  <li class=""><a class="nav-link" href="layout-default.html">Admin Create</a></li>
+                  <li class="@yield('adm-nav-create')"><a class="nav-link" href="/users/admin/create">Admin Create</a></li>
                   <li class="@yield('adm-nav-deleted')"><a class="nav-link" href="/users/admin/view/deleted">Admin Deleted</a></li>
                 </ul>
               </li>
@@ -412,7 +414,7 @@
   </div>
 
   <!-- General JS Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -423,9 +425,12 @@
   <!-- JS Libraies -->
 
   <!-- Template JS File -->
+  <script src="/admin/assets/cleave.js/dist/addons/cleave-phone.us.js"></script> 
+  <script src="/admin/assets/select2/dist/js/select2.full.min.js"></script>
   <script src="/admin/assets/js/scripts.js"></script>
   <script src="/admin/assets/js/custom.js"></script>
   <script src="/admin/assets/js/page/index-0.js"></script>
+
 
 
   <!-- Page Specific JS File -->

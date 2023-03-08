@@ -14,7 +14,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Invoices</h4>
+                                <h4>Deleted</h4>
                                 <div class="card-header-action">
                                     <a href="#" class="btn btn-danger">View More <i
                                             class="fas fa-chevron-right"></i></a>
@@ -22,7 +22,7 @@
                             </div>
                             <div class="card-body p-0">
                                 <div class="table-responsive table-invoice">
-                                    <table class="table table-striped">
+                                    <table class="table table-striped mb-0">
                                         <tr>
                                             <th>ID</th>
                                             <th>Nama</th>
