@@ -69,11 +69,10 @@
                                                     <td>
                                                         <a href="/users/admin/{{ $data->id }}"
                                                             class="font-weight-600"><img src="@if ($data->profil_img == null) /admin/assets/img/avatar/avatar-1.png @else {{ $data->profil_img }} @endif"
-                                                                alt="avatar" width="30" class="rounded-circle mr-1">
-                                                            {{ $data->name }}</a>
+                                                                alt="avatar" width="30" class="rounded-circle mr-1"> {{ $data->name }}</a>
                                                     </td>
                                                     <td>
-                                                          <button id="btnDeletedForm" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|Are you sure you want to remove {{ $data->name }}?. Do you want to continue?" data-confirm-yes="deletedForm(`{{ $data->id }}`)"><i class="fas fa-trash"></i></button>
+                                                        <button value="{{$data->id}}" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" id="deleteForm"><i class="fas fa-trash"></i></button>
                                                     </td>
                                                 </tr>
                                             @endforeach

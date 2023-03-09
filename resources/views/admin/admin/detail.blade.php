@@ -24,7 +24,7 @@
             <div class="profile-widget-items">
               <div class="profile-widget-item">
                 <div class="profile-widget-item-label">Posts</div>
-                <div class="profile-widget-item-value">187</div>
+                <div class="profile-widget-item-value"></div>
               </div>
               <div class="profile-widget-item">
                 <div class="profile-widget-item-label">Created at</div>
@@ -32,7 +32,7 @@
               </div>
               <div class="profile-widget-item">
                 <div class="profile-widget-item-label">Following</div>
-                <div class="profile-widget-item-value">2,1K</div>
+                <div class="profile-widget-item-value"></div>
               </div>
             </div>
           </div>

@@ -20,24 +20,28 @@ $("#swal-5").click(function() {
 	swal('Good Job', 'You clicked the button!', 'error');
 });
 
-$("#swal-6").click(function() {
+$("#deleteForm").click(function() {
+  const dataID = $(this).val();
+  console.log(dataID) 
   swal({
       title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this imaginary file!',
+      text: `Once deleted, you will not be able to recover this imaginary ${dataID}!`,
       icon: 'warning',
       buttons: true,
       dangerMode: true,
     })
     .then((willDelete) => {
       if (willDelete) {
-      swal('Poof! Your imaginary file has been deleted!', {
+      swal('WSsh! Your data has been deleted!', {
         icon: 'success',
       });
+
       } else {
-      swal('Your imaginary file is safe!');
+      swal('Your data is safe!');
       }
     });
 });
+
 
 $("#swal-7").click(function() {
   swal({

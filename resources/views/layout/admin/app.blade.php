@@ -427,6 +427,8 @@
   <!-- Template JS File -->
   <script src="/admin/assets/cleave.js/dist/addons/cleave-phone.us.js"></script> 
   <script src="/admin/assets/select2/dist/js/select2.full.min.js"></script>
+  <script src="/admin/assets/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="/admin/assets/js/page/modules-sweetalert.js"></script>
   <script src="/admin/assets/js/scripts.js"></script>
   <script src="/admin/assets/js/custom.js"></script>
   <script src="/admin/assets/js/page/index-0.js"></script>
