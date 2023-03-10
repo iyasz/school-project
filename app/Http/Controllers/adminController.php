@@ -94,11 +94,15 @@ class adminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($admin)
     {
-        $admin = User::find($id);
-        return response()->$admin->delete();
-        // return redirect('/users/admin');
+        $q = User::find($admin);
+        
+        if (!$q) {
+            return response()->json(['error' => 'Item not found'], 404);
+        }
+        $q->delete();
+        return response()->json(['message' => 'Item deleted']);
     }
     
     public function deleted()
