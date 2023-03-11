@@ -1,13 +1,13 @@
 @extends('layout.admin.app')
 
-@section('adm-nav-index', 'active')
-@section('adm-nav', 'active')
+@section('tch-nav-index', 'active')
+@section('tch-nav', 'active')
 
 @section('content')
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Admin</h1>
+                <h1>Teacher</h1>
             </div>
             <div class="section-body">
                 <div class="row">
@@ -40,9 +40,9 @@
                     <div class="col-lg-9 col-md-12 col-12 col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Latest Admin</h4>
+                                <h4>Latest Teacher</h4>
                                 <div class="card-header-action">
-                                    <a href="/users/admin/create" class="btn btn-primary">Create</a>
+                                    <a href="/users/teacher/create" class="btn btn-primary">Create</a>
                                 </div>
                             </div>
                             <div class="card-body p-0">
@@ -50,27 +50,21 @@
                                     <table class="table table-striped mb-0" id="tableAdmin">
                                         <thead>
                                             <tr>
-                                                <th>Title</th>
+                                                <th>No</th>
                                                 <th>Nama</th>
+                                                <th>Hometeacher</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="adminPageForeach">
-                                            @foreach ($admin as $data)
+                                        <tbody id="PageForeach">
+                                            @foreach ($teachers as $data)
                                                 <tr>
+                                                    <td>{{$loop->iteration}}</td>
                                                     <td>
-                                                        Production Admin BM3
-                                                        <div class="table-links">
-                                                            in <a href="/users/admin/{{$data->id}}">Web Development</a>
-                                                            <div class="bullet"></div>
-                                                            <a href="/users/admin/{{$data->id}}">View</a>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="/users/admin/{{ $data->id }}"
-                                                            class="font-weight-600"><img src="@if ($data->profil_img == null) /admin/assets/img/avatar/avatar-1.png @else {{ $data->profil_img }} @endif"
-                                                                alt="avatar" width="30" class="rounded-circle mr-1"> {{ $data->name }}</a>
-                                                    </td>
+                                                        <a href="/users/teacher/{{ $data->id }}"
+                                                            class="font-weight-600"><img src="@if ($data->profil_img == null) /admin/assets/img/avatar/avatar-1.png @else {{ $data->profil_img }} @endif" alt="avatar" width="30" class="rounded-circle mr-1"> {{ $data->name }}</a>
+                                                        </td>
+                                                        <td><div class="badge badge-pill @if($data->is_hometeacher == 1)badge-danger @else badge-primary @endif mb-1 ">@if($data->is_hometeacher == 1)Bukan @else Benar @endif</div></td>
                                                     <td>
                                                         <button value="{{$data->id}}" class="btn btn-danger btn-action deleteForm" data-toggle="tooltip" title="Delete" id="deleteForm"><i class="fas fa-trash"></i></button>
                                                     </td>
@@ -80,7 +74,7 @@
                                     </table>
                                 </div>
                                 <div class="card-footer pb-1 d-flex justify-content-end">
-                                    <span id="footerPage">{{ $admin->links() }}</span>
+                                    <span id="footerPage">{{ $teachers->links() }}</span>
                                 </div>
                             </div>
                         </div>

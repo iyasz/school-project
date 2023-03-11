@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,7 +17,16 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes;
     public $timestamps = FALSE;
     
-    protected $dates = ['deleted_at'];
+
+    public function classroom()
+    {
+        return $this->belongsTo(classroom::class);
+    }
+
+    public function jurusan()
+    {
+        return $this->belongsTo(jurusan::class);
+    }
 
     public function getIncrementing()
     {
@@ -39,8 +49,15 @@ class User extends Authenticatable
         'username',
         'no_telp',
         'password',
+        'birthday',
+        'hometown',
         'role_id',
+        'is_hometeacher',
         'last_login',
+        'point',
+        'classroom_id',
+        'jurusan_id',
+        'address',
         'created_at',
     ];
 

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+
 
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 class adminController extends Controller
@@ -15,7 +17,7 @@ class adminController extends Controller
 
     public function paginate($page)
     {
-        $admin = DB::table('users')->where('role_id', 1)->paginate($page);
+        $admin = User::where('role_id', 1)->paginate($page);
 
         return $admin;
     }
@@ -23,7 +25,7 @@ class adminController extends Controller
     public function index(Request $request)
     {
 
-        $admin = DB::table('users')->where('role_id', 1)->paginate(5);
+        $admin = User::where('role_id', 1)->paginate(50);
         return view('admin.admin.index', ['admin' => $admin]);
     }
 
@@ -44,9 +46,9 @@ class adminController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'email' => 'required|email',
-            'username' => 'required|max:150',
-            'no_telp' => 'required|numeric|digits_between:7,15',
+            'email' => 'required|email|unique:users',
+            'username' => 'required|max:150|unique:users',
+            'no_telp' => 'required|numeric|digits_between:7,15|unique:users',
             'gender' => 'required',
             'password' => 'required|confirmed',
         ];
@@ -71,7 +73,10 @@ class adminController extends Controller
      */
     public function show(string $id)
     {
-        $admin = User::findOrFail($id);
+        $admin = User::withTrashed()->findOrFail($id);
+        if($admin->role_id != 1){
+            abort(404);
+        }
         return view('admin.admin.detail', ['admin' => $admin]);
     }
 
@@ -94,7 +99,7 @@ class adminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($admin)
+    public function destroy(Request $request, $admin)
     {
         $q = User::find($admin);
         
@@ -107,9 +112,10 @@ class adminController extends Controller
     
     public function deleted()
     {
-        $admin = User::onlyTrashed()->where('role_id', 1)->get();
+        $admin = User::onlyTrashed()->where('role_id', 1)->get()->take(10);
+        $adm = User::onlyTrashed()->where('role_id', 1)->get()->take(3);
         $adminCount = User::onlyTrashed()->where('role_id', 1)->get()->count();
-        return view('admin.admin.softdelete', ['admin' => $admin, 'count' => $adminCount]);
+        return view('admin.admin.softdelete', ['admin' => $admin, 'count' => $adminCount, 'adm' => $adm]);
     }
 
     public function restore($id)

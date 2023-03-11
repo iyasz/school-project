@@ -33,20 +33,23 @@ $("#swal-5").click(function() {
     })
     .then((willDelete) => {
       if (willDelete) {
+
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+
         $.ajax({
           url: '/users/admin/'+dataID,
           type: 'DELETE',
-          data: {
-            "_token": "{{ csrf_token() }}",
-          },
           success: function(res){
-            console.log(res)
             swal('WSsh! Your data has been deleted!', {
               icon: 'success',
             });
+            setInterval(window.location.reload(), 2400)
           },
           error: function(err){
-            console.log(err)
             swal('Hhh! Can\'t delete data!', {
               icon: 'error',
             });

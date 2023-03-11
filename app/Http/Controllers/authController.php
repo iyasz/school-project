@@ -26,20 +26,18 @@ class authController extends Controller
 
             $userFind = User::find(Auth::user()->id);
             
-            $userFind->last_login = Carbon::now('Asia/Bangkok')->format('Y-m-d H:i:s');
-
+            $userFind->last_login = Carbon::now();
             $userFind->save();
 
             if(Auth::user()->role_id == 1){
-                return redirect()->intended('/app');
+                return redirect('/app');
             }elseif(Auth::user() == 2){
-                return redirect()->intended('/dashboard/teacher');
+                return redirect('/dashboard/teacher');
             }else{
-                return redirect()->intended('/dashboard');
+                return redirect('/dashboard');
             }
         }
 
-        Carbon::parse();
 
         return back()->withErrors([
             'username' => 'username tidak ditemukan'

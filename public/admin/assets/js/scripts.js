@@ -58,7 +58,7 @@ $('[data-confirm]').each(function() {
 $(document).ready(function(){
   $("#inputAdmin").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-    $("#tableAdmin tr").filter(function() {
+    $("#PageForeach tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
@@ -66,30 +66,6 @@ $(document).ready(function(){
 
 // func delete admin
 
-function deletedForm(id){
-  // console.log($(this).attr("value"))
-  // console.log(id)
-  // $.ajaxSetup({
-  //   headers: {
-  //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  //   }
-  // });
-
-    $.ajax({
-          type: "DELETE",
-          data: {
-          _token: "{{ csrf_token() }}",
-          },
-           url: "/users/admin/" + id,
-           success: function (data) {
-             console.log(data);
-            location.replace("/users/admin")
-            },
-            error: function (e) {
-              console.log(e)
-            },
-      });
-}
 
 // paginate admin 
   $('#paginateSelect').on('change', function(){
@@ -99,7 +75,7 @@ function deletedForm(id){
     url: '/users/admin/paginate/' + pageVal,
     type: 'GET',
     success: function(e){
-      $('#adminPageForeach').html('');
+      $('#PageForeach').html('');
 
       $.each(e.data, function(index, value) {
         // create a new row for each value
@@ -117,15 +93,14 @@ function deletedForm(id){
         nameCell.append(`<a href="/users/admin/${value.id}" class="font-weight-600"><img src="` + (value.profil_img === null ? `/admin/assets/img/avatar/avatar-1.png` : value.profil_img) + `" alt="avatar" width="30" class="rounded-circle mr-1">${value.name}</a>`)
 
         var emailCell = $('<td>').text('');
-        emailCell.append(`<button id="btnDeletedForm" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|Are you sure you want to remove `+value.name+`?. Do you want to continue?" data-confirm-yes="`+ deletedForm(value.id)+`"><i class="fas fa-trash"></i></button>`)
+        emailCell.append(`<button value="`+ value.id +`" class="btn btn-danger btn-action deleteForm " data-toggle="tooltip" title="Delete"><i class="fas fa-trash"></i></button>`)
 
         // append the cells to the row
         row.append(idCell, nameCell, emailCell);
         // append the row to the table
-        $('#adminPageForeach').append(row);
-        
-
+        $('#PageForeach').append(row);
       })
+
       // console.log(e)
       if(e.data.length < pageVal){
         $('#footerPage').html('');
@@ -156,6 +131,61 @@ function deletedForm(id){
 //   .finally(function () {
 //     // always executed
 //   });
+
+// hide show is hometeacher 
+
+$(document).ready(function(){
+
+  $('.hometeacherValid').hide();
+
+  $('#hometeacherValue').on('change', function(){
+    if($(this).val() == 2){
+    $('.hometeacherValid').show();
+  }else{
+    $('.hometeacherValid').hide();
+  }
+})
+});
+
+//get daerah indonesia
+$('#birthplaceSearch').on('keyup', function(){
+  console.log($(this).val())
+  $.ajax({
+    type: 'GET',
+    url: '/users/daerah',
+    success: function(e){
+      
+      console.log(e.provinsi)
+      $.each(e.provinsi, function(index, value) {
+        // create a new row for each value
+        // console.log(value.id + ": " + value.name);
+
+        var row = $('<tr>');
+        // create a cell for each field in the value
+        var idCell = $('<td>').text(`Production Admin BM3`);
+        idCell.append(`<div class="table-links"> in <a href="#">Web Development</a>
+                 <div class="bullet"></div>
+                    <a href="#">View</a>
+                </div>`);
+
+        var nameCell = $('<td>').text('');
+        nameCell.append(`<a href="/users/admin/${value.id}" class="font-weight-600"><img src="` + (value.profil_img === null ? `/admin/assets/img/avatar/avatar-1.png` : value.profil_img) + `" alt="avatar" width="30" class="rounded-circle mr-1">${value.name}</a>`)
+
+        var emailCell = $('<td>').text('');
+        emailCell.append(`<button value="`+ value.id +`" class="btn btn-danger btn-action deleteForm " data-toggle="tooltip" title="Delete"><i class="fas fa-trash"></i></button>`)
+
+        // append the cells to the row
+        row.append(idCell, nameCell, emailCell);
+        // append the row to the table
+        $('#valueDaerah').append(row);
+      })
+
+    },
+    error: function(x){
+      console.log(x)
+    }
+  })
+})
 
 
 // Global

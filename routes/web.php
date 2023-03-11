@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\accountController;
-use App\Http\Controllers\adminController;
 use App\Http\Controllers\authController;
-use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\admin\adminController;
+use App\Http\Controllers\admin\dashboardController;
+use App\Http\Controllers\admin\teacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,10 +26,12 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/account/profile', [accountController::class, 'profile']);
 
         Route::resource('/users/admin', adminController::class);  
+        Route::resource('/users/teacher', teacherController::class);
          
         Route::get('/users/admin/view/deleted', [adminController::class, 'deleted']);
         Route::get('/users/admin/paginate/{page}', [adminController::class, 'paginate']);
         Route::post('/users/admin/view/{id}', [adminController::class, 'restore']);
+        Route::get('/users/daerah', [teacherController::class, 'daerah']);
     });
 
     Route::middleware(['teacher'])->group(function () {

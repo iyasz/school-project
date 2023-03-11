@@ -31,8 +31,8 @@
                 <div class="profile-widget-item-value">{{date('d M', strtotime($admin->created_at))}}</div>
               </div>
               <div class="profile-widget-item">
-                <div class="profile-widget-item-label">Following</div>
-                <div class="profile-widget-item-value"></div>
+                <div class="profile-widget-item-label">Gender</div>
+                <div class="profile-widget-item-value">@if($admin->gender == 1) M @else W @endif</div>
               </div>
             </div>
           </div>

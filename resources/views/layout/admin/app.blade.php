@@ -14,6 +14,8 @@
   
   <!-- Template CSS -->
   <link rel="stylesheet" href="/admin/assets/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="/admin/assets/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+  <link rel="stylesheet" href="/admin/assets/bootstrap-daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="/admin/assets/css/style.css">
   <link rel="stylesheet" href="/admin/assets/css/components.css">
 </head>
@@ -266,20 +268,20 @@
                   <li class="@yield('adm-nav-deleted')"><a class="nav-link" href="/users/admin/view/deleted">Admin Deleted</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown ">
+              <li class="nav-item dropdown @yield('tch-nav')">
                 <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Teachers</span></a>
                 <ul class="dropdown-menu">
-                  <li class=""><a class="nav-link" href="layout-default.html">Teachers List</a></li>
-                  <li class=""><a class="nav-link" href="layout-default.html">Teachers Create</a></li>
-                  <li class=""><a class="nav-link" href="layout-default.html">Teachers Deleted</a></li>
+                  <li class="@yield('tch-nav-index')"><a class="nav-link" href="/users/teacher">Teachers List</a></li>
+                  <li class="@yield('tch-nav-create')"><a class="nav-link" href="/users/teacher/create">Teachers Create</a></li>
+                  <li class="@yield('tch-nav-deleted')"><a class="nav-link" href="/users/teacher/deleted">Teachers Deleted</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown ">
+              <li class="nav-item dropdown @yield('std-nav')">
                 <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Students</span></a>
                 <ul class="dropdown-menu">
-                  <li class=""><a class="nav-link" href="layout-default.html">Students List</a></li>
-                  <li class=""><a class="nav-link" href="layout-default.html">Students Create</a></li>
-                  <li class=""><a class="nav-link" href="layout-default.html">Students Deleted</a></li>
+                  <li class="@yield('std-nav-index')"><a class="nav-link" href="/users/">Students List</a></li>
+                  <li class="@yield('std-nav-create')"><a class="nav-link" href="">Students Create</a></li>
+                  <li class="@yield('std-nav-deleted')"><a class="nav-link" href="">Students Deleted</a></li>
                 </ul>
               </li>
               <li class="menu-header">Classroom</li>
@@ -429,6 +431,8 @@
   <script src="/admin/assets/select2/dist/js/select2.full.min.js"></script>
   <script src="/admin/assets/sweetalert/dist/sweetalert.min.js"></script>
   <script src="/admin/assets/js/page/modules-sweetalert.js"></script>
+  <script src="/admin/assets/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+  <script src="/admin/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
   <script src="/admin/assets/js/scripts.js"></script>
   <script src="/admin/assets/js/custom.js"></script>
   <script src="/admin/assets/js/page/index-0.js"></script>

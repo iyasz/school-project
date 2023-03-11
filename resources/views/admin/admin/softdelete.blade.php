@@ -32,7 +32,7 @@
                                         @foreach ($admin as $data)             
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td class="font-weight-600"><a href="">{{$data->name}}</a></td>
+                                            <td class="font-weight-600"><a href="/users/admin/{{$data->id}}">{{$data->name}}</a></td>
                                          
                                             <td>{{ date("d M Y", strtotime($data->deleted_at)) }}</td>
                                             <td>
@@ -59,36 +59,19 @@
                             </div>
                             <div class="card-body p-0">
                                 <div class="tickets-list">
-                                    <a href="#" class="ticket-item">
+                                    @foreach ($adm as $data)
+                                        
+                                    <a href="/users/admin/{{$data->id}}" class="ticket-item">
                                         <div class="ticket-title">
-                                            <h4>My order hasn't arrived yet</h4>
+                                            <h4>Data has been deleted</h4>
                                         </div>
                                         <div class="ticket-info">
-                                            <div>Laila Tazkiah</div>
+                                            <div>{{$data->name}}</div>
                                             <div class="bullet"></div>
-                                            <div class="text-primary">1 min ago</div>
+                                            <div class="text-primary">{{ \Carbon\Carbon::now('Asia/Jakarta')->diffForHumans($data->deleted_at)}}</div>
                                         </div>
                                     </a>
-                                    <a href="#" class="ticket-item">
-                                        <div class="ticket-title">
-                                            <h4>Please cancel my order</h4>
-                                        </div>
-                                        <div class="ticket-info">
-                                            <div>Rizal Fakhri</div>
-                                            <div class="bullet"></div>
-                                            <div>2 hours ago</div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="ticket-item">
-                                        <div class="ticket-title">
-                                            <h4>Do you see my mother?</h4>
-                                        </div>
-                                        <div class="ticket-info">
-                                            <div>Syahdan Ubaidillah</div>
-                                            <div class="bullet"></div>
-                                            <div>6 hours ago</div>
-                                        </div>
-                                    </a>
+                                    @endforeach
                                     <a href="features-tickets.html" class="ticket-item ticket-more">
                                         View All <i class="fas fa-chevron-right"></i>
                                     </a>
