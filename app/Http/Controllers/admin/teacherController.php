@@ -111,6 +111,14 @@ class teacherController extends Controller
         //
     }
 
+    public function deleted()
+    {
+        $teacher = User::withTrashed()->where('role_id', 2);
+        $count = User::onlyTrashed()->where('role_id', 2)->count();
+        $tch = User::withTrashed()->where('role_id', 2)->take(3);
+        return view('admin.teacher.softdelete', ['teacher' => $teacher, 'tch' => $tch, 'count' => $count]);
+    }
+
     public function daerah()
     {
         $provinsi = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi')->json();

@@ -46,18 +46,20 @@ $("#swal-5").click(function() {
           success: function(res){
             swal('WSsh! Your data has been deleted!', {
               icon: 'success',
-            });
-            setInterval(window.location.reload(), 2400)
+            })
           },
           error: function(err){
             swal('Hhh! Can\'t delete data!', {
               icon: 'error',
             });
           }
-
         });
-      } else {
-        swal('Your data is safe!');
+
+        setTimeout(() => {
+          location.reload();
+        }, 1700);
+        
+
       }
     });
   });

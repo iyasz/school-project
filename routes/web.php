@@ -29,8 +29,12 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('/users/teacher', teacherController::class);
          
         Route::get('/users/admin/view/deleted', [adminController::class, 'deleted']);
-        Route::get('/users/admin/paginate/{page}', [adminController::class, 'paginate']);
         Route::post('/users/admin/view/{id}', [adminController::class, 'restore']);
+        
+        Route::get('/users/teacher/view/deleted', [teacherController::class, 'deleted']);
+        Route::post('/users/teacher/view/{id}', [teacherController::class, 'restore']);
+
+        Route::get('/users/admin/paginate/{page}', [adminController::class, 'paginate']);
         Route::get('/users/daerah', [teacherController::class, 'daerah']);
     });
 

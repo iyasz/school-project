@@ -273,7 +273,7 @@
                 <ul class="dropdown-menu">
                   <li class="@yield('tch-nav-index')"><a class="nav-link" href="/users/teacher">Teachers List</a></li>
                   <li class="@yield('tch-nav-create')"><a class="nav-link" href="/users/teacher/create">Teachers Create</a></li>
-                  <li class="@yield('tch-nav-deleted')"><a class="nav-link" href="/users/teacher/deleted">Teachers Deleted</a></li>
+                  <li class="@yield('tch-nav-deleted')"><a class="nav-link" href="/users/teacher/view/deleted">Teachers Deleted</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown @yield('std-nav')">
