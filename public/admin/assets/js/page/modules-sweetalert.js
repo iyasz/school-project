@@ -20,13 +20,14 @@ $("#swal-5").click(function() {
 	swal('Good Job', 'You clicked the button!', 'error');
 });
 
-  $(".deleteForm").click(function(e) {
-    e.preventDefault();
+function getDeleteForm(id, route){
+  // e.preventDefault();
 
-    const dataID = $(this).val();
+    // const dataID = $(this).val();
+    const dataID = id;
     swal({
       title: 'Are you sure?',
-      text: `Once deleted, you will not be able to recover this imaginary!`,
+      text: `Are you sure you want to delete this data?`,
       icon: 'warning',
       buttons: true,
       dangerMode: true,
@@ -41,7 +42,7 @@ $("#swal-5").click(function() {
         });
 
         $.ajax({
-          url: '/users/admin/'+dataID,
+          url: route+dataID,
           type: 'DELETE',
           success: function(res){
             swal('WSsh! Your data has been deleted!', {
@@ -54,15 +55,22 @@ $("#swal-5").click(function() {
             });
           }
         });
-
+        
         setTimeout(() => {
           location.reload();
-        }, 1700);
-        
+        }, 1700);   
 
       }
     });
-  });
+  };
+
+$(".deleteForm").click(function() {
+    getDeleteForm($(this).val(), $(this).attr('route'))
+});
+
+ 
+
+
   
 
 $("#swal-7").click(function() {

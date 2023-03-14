@@ -108,14 +108,20 @@ class teacherController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $teacher = User::find($id);
+        if(!$teacher){
+            return response()->json(['message' => 'cannot find the teacher']);
+        }
+        $teacher->delete();
+        
+        return response()->json(['message' => 'data deleted!']);
     }
 
     public function deleted()
     {
-        $teacher = User::withTrashed()->where('role_id', 2);
+        $teacher = User::onlyTrashed()->where('role_id', 2)->get()->take(10);
+        $tch = User::onlyTrashed()->where('role_id', 2)->take(3)->get();
         $count = User::onlyTrashed()->where('role_id', 2)->count();
-        $tch = User::withTrashed()->where('role_id', 2)->take(3);
         return view('admin.teacher.softdelete', ['teacher' => $teacher, 'tch' => $tch, 'count' => $count]);
     }
 

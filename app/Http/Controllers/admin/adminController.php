@@ -99,7 +99,7 @@ class adminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, $admin)
+    public function destroy($admin)
     {
         $q = User::find($admin);
         

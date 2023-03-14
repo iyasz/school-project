@@ -72,7 +72,7 @@
                                                                 alt="avatar" width="30" class="rounded-circle mr-1"> {{ $data->name }}</a>
                                                     </td>
                                                     <td>
-                                                        <button value="{{$data->id}}" class="btn btn-danger btn-action deleteForm" data-toggle="tooltip" title="Delete" id="deleteForm"><i class="fas fa-trash"></i></button>
+                                                        <button value="{{$data->id}}" route="/users/admin/" class="btn btn-danger btn-action deleteForm" data-toggle="tooltip" title="Delete" id="deleteForm"><i class="fas fa-trash"></i></button>
                                                     </td>
                                                 </tr>
                                             @endforeach

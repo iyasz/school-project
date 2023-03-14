@@ -66,7 +66,7 @@
                                                         </td>
                                                         <td><div class="badge badge-pill @if($data->is_hometeacher == 1)badge-danger @else badge-primary @endif mb-1 ">@if($data->is_hometeacher == 1)Bukan @else Benar @endif</div></td>
                                                     <td>
-                                                        <button value="{{$data->id}}" class="btn btn-danger btn-action deleteForm" data-toggle="tooltip" title="Delete" id="deleteForm"><i class="fas fa-trash"></i></button>
+                                                        <button value="{{$data->id}}" route="/users/teacher/" class="btn btn-danger btn-action deleteForm" data-toggle="tooltip" title="Delete" id="deleteForm"><i class="fas fa-trash"></i></button>
                                                     </td>
                                                 </tr>
                                             @endforeach
