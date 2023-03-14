@@ -132,4 +132,11 @@ class teacherController extends Controller
         return response()->json($provinsi);
 
     }
+
+    public function restore($id)
+    {
+        $teacher = User::withTrashed()->where('id', $id)->restore();
+        return redirect('/users/teacher/view/deleted');
+        
+    }
 }
