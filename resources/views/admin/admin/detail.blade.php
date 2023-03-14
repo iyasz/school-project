@@ -1,6 +1,5 @@
 @extends('layout.admin.app')
 
-@section('adm-nav-index', 'active')
 @section('adm-nav', 'active')
 
 @section('content')
@@ -23,8 +22,8 @@
             <img alt="image" src="@if($admin->profil_img == NULL) /admin/assets/img/avatar/avatar-1.png @else {{$admin->profil_img}} @endif" class="rounded-circle profile-widget-picture">
             <div class="profile-widget-items">
               <div class="profile-widget-item">
-                <div class="profile-widget-item-label">Posts</div>
-                <div class="profile-widget-item-value"></div>
+                <div class="profile-widget-item-label">Status</div>
+                <div class="profile-widget-item-value"><div class=""><div class="badge badge-pill @if($admin->deleted_at)badge-danger @else badge-primary @endif ">@if($admin->deleted_at)Deleted @else Active @endif</div></div></div>
               </div>
               <div class="profile-widget-item">
                 <div class="profile-widget-item-label">Created at</div>
